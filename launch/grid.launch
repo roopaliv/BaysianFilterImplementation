@@ -1,0 +1,5 @@
+<launch>
+	<node name="achiever" pkg="lab4" type="achiever.py" args="$(find lab4)/scripts/grid.bag"/>
+	<!--<node pkg="rviz" type="rviz" name="rviz"/>-->
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find lab4)/rviz/ransacConf.rviz"/>
+</launch>

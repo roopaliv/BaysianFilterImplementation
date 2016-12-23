@@ -1,0 +1,36 @@
+#!/usr/bin/env python
+import rospy
+import rosbag
+#from lab4.msg import Motion
+#from lab4.msg import Observation
+
+def achiever():
+    rospy.init_node('achiever', anonymous=True)
+    rate = rospy.Rate(10) # 10hz
+    while not rospy.is_shutdown():
+        bag = rosbag.Bag('/home/first/catkin_ws/src/lab4/scripts/grid.bag')
+        for topic, msg, t in bag.read_messages(topics=['Movements', 'Observations']):
+            if(topic == 'Movements'):
+                rospy.loginfo(msg)
+                #motionMsg = Motion()
+                #motionMsg.timeTag = msg.timeTag
+                #motionMsg.rotation1 = msg.rotation1
+                #motionMsg.translation = msg.translation
+                #motionMsg.rotation2 = rotation2
+
+            elif(topic == 'Observations'):
+                rospy.loginfo(msg)
+                #ObservationMsg = Observation()
+                #ObservationMsg.timeTag = msg.timeTag
+                #ObservationMsg.tagNum = msg.tagNum
+                #ObservationMsg.range = msg.range
+                #ObservationMsg.bearing = msg.bearing
+
+        bag.close()
+        rate.sleep()
+
+if __name__ == '__main__':
+	    try:
+		achiever()
+	    except rospy.ROSInterruptException:
+		pass
